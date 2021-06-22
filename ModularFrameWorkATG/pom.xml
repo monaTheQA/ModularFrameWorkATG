@@ -46,7 +46,7 @@
     <version>2.22.2</version>
     <configuration>
     <suiteXmlFiles>
-    <suiteXmlFile>${suiteXmlFIle}</suiteXmlFile>
+    <suiteXmlFile>src/main/resources/testng.xml</suiteXmlFile>
     </suiteXmlFiles>
     </configuration>
   </plugin>
