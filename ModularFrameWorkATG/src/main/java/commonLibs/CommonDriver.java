@@ -15,17 +15,20 @@ public class CommonDriver {
 	
 	public CommonDriver(String browserType) throws Exception
 	{
-		pageLoadTimeout = 30;
+		pageLoadTimeout = 35;
 		elementdetectionTimeout = 30;
 		
 		currentDirectory = System.getProperty("user.dir");
 		if(browserType.equalsIgnoreCase("chrome"))
 		{
+		System.setProperty("webdriver.chrome.whitelistedIps", "");
 			System.setProperty("webdriver.chrome.driver",
 					currentDirectory + "/drivers/chromedriver.exe");
 			ChromeOptions options = new ChromeOptions();
-			options.addArguments("disable-features=NetworkService");				
+			options.addArguments("disable-features=NetworkService");	
+		System.out.println("chromedriver before");
 			driver = new ChromeDriver(options);
+			System.out.println("chromedriver after");
 		}
 		else if(browserType.equalsIgnoreCase("firefox"))
 		{
