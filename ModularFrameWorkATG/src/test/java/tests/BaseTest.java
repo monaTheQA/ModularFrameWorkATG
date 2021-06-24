@@ -29,16 +29,13 @@ public class BaseTest {
 	Properties configProperty;
 	String reportFileName;
 	ReportUtil reportUtil;
-	ScreenshotUtil screenshot;
+	ScreenshotUtil screenShot;
 	
 	@BeforeSuite(alwaysRun=true)
 	public void preSetUp() throws Exception 
 	{
-		System.out.println("preSEUPPPPP");
 		currentWorkingDirectory = System.getProperty("user.dir");
-		System.out.println(currentWorkingDirectory);
 		configFileName = currentWorkingDirectory + "\\config\\config.properties";
-		System.out.println(configFileName);
 		configProperty = ConfigUtil.readProperties(configFileName);
 		reportFileName = currentWorkingDirectory + "\\reports\\ATG_Report.html";
 		reportUtil = new ReportUtil(reportFileName);
@@ -52,23 +49,23 @@ public class BaseTest {
 		commonDriver = new CommonDriver(browserType);
 		driver = commonDriver.getDriver();
 		homePage = new HomePage(driver);
-		screenshot = new ScreenshotUtil(driver);
+		screenShot = new ScreenshotUtil(driver);
 		commonDriver.navigateToUrl(url);
 	}
 	
 	@AfterMethod
 	public void postTestAction(ITestResult result) throws Exception
 	{
-		String testcaseName = result.getName();
+		String testCaseName = result.getName();
 		long executionTime = System.currentTimeMillis();
-		String screenshotFileName = currentWorkingDirectory + "\\screenshots\\"
-				+ testcaseName + executionTime + ".png";
-		System.out.println(screenshotFileName);
+		String screenShotFileName = currentWorkingDirectory + "\\screenshots\\"
+				+ testCaseName + executionTime + ".png";
+		reportUtil.addTestLog(Status.INFO, "ScreenShotFileName: "+screenShotFileName);
 		if(result.getStatus() == ITestResult.FAILURE)
 		{
-			reportUtil.addTestLog(Status.FAIL, "One or more test fail");
-			screenshot.captureAndSaveScreenShot(screenshotFileName);
-			reportUtil.attachedScreenshotToReport(screenshotFileName);
+			reportUtil.addTestLog(Status.FAIL, "One or more test failed");
+			screenShot.captureAndSaveScreenShot(screenShotFileName);
+			reportUtil.attachedScreenshotToReport(screenShotFileName);
 		}
 	}
 	
