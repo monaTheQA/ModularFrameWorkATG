@@ -28,7 +28,7 @@ public class HomePage extends BasePage {
 	private WebElement alertAccept;
 	
 	@CacheLookup
-	@FindBy(xpath="//*[@id=\"sidemenu\"]/div/div[2]/div[2]/div[1]/div/div[2]")
+	@FindBy(xpath="//div[contains(text(),'Alla spel')]")
 	private WebElement allSpelaLink;
 	
 	@CacheLookup

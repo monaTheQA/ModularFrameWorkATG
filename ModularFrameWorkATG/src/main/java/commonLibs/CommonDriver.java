@@ -74,4 +74,8 @@ public class CommonDriver {
 		return driver.getTitle();
 	}
 
+	public void getPageTitle()
+	{
+		driver.getTitle();
+	}
 }
